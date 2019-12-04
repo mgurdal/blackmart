@@ -13,10 +13,10 @@ import (
 func main() {
 	usr := &user.User{
 		ID: 123,
-		Market: market.Market{
-			Products: []market.Product{},
+		Market: &market.Market{
+			Products: []*market.Product{},
 		},
-		Inventory: inventory.Inventory{
+		Inventory: &inventory.Inventory{
 			Items: map[string]*inventory.Item{},
 		},
 	}
