@@ -25,7 +25,7 @@ func (f *Factory) Start() {
 	f.UpdatedAt = time.Now()
 	go func(f *Factory) {
 		for {
-			<-time.After(3 * time.Second)
+			<-time.After(1 * time.Second)
 			f.Update(time.Now())
 		}
 	}(f)
