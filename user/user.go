@@ -9,14 +9,14 @@ import (
 
 type User struct {
 	ID int
-	market.Market
-	inventory.Inventory
+	*market.Market
+	*inventory.Inventory
 }
 
 func (u *User) MoveToMarket(item *inventory.Item, price int, amount int) error {
 	if item.Quantity >= amount {
 		item.Quantity -= amount
-		product := market.Product{
+		product := &market.Product{
 			Quantity: amount,
 			ItemName: item.Name,
 			Price:    price,
