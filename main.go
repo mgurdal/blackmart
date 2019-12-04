@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"time"
 
 	"github.com/mgurdal/blackmarkt/factory"
@@ -26,7 +25,6 @@ func main() {
 		Quantity: 50,
 	}
 	usr.Inventory.Add(newApples)
-	log.Println(usr.Inventory)
 	forever := make(chan bool)
 	factory := factory.Factory{
 		ItemName:  newApples.Name,
