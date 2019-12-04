@@ -2,15 +2,18 @@ package user
 
 import (
 	"errors"
+	"net"
 
+	"github.com/google/uuid"
 	"github.com/mgurdal/blackmarkt/inventory"
 	"github.com/mgurdal/blackmarkt/market"
 )
 
 type User struct {
-	ID int
+	ID uuid.UUID
 	*market.Market
 	*inventory.Inventory
+	Conn net.Conn
 }
 
 func (u *User) MoveToMarket(item *inventory.Item, price int, amount int) error {
