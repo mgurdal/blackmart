@@ -33,11 +33,11 @@ func (f *Factory) Start() {
 
 // IsFull check whether the deposit is reached to the limit.
 func (f *Factory) IsFull() bool {
-	if f.Deposit == f.Limit {
+	if f.Deposit < f.Limit {
+		return false
+	}
 		return true
 	}
-	return false
-}
 
 func (f *Factory) Update(now time.Time) {
 	delta := time.Since(f.UpdatedAt) / time.Second
