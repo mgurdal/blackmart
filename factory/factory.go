@@ -36,13 +36,14 @@ func (f *Factory) IsFull() bool {
 	if f.Deposit < f.Limit {
 		return false
 	}
-		return true
-	}
+	return true
+}
 
 func (f *Factory) Update(now time.Time) {
 	delta := time.Since(f.UpdatedAt) / time.Second
 	if f.IsFull() {
 		f.UpdatedAt = now
+		log.Println("Deposit is full.")
 		return
 	}
 	periods := int(delta) * f.Speed
@@ -66,6 +67,9 @@ func (f *Factory) Update(now time.Time) {
 
 }
 
+// Collect transports factory deposit to user inventory.
 func (f *Factory) Collect() {
-
+	f.User.Inventory.Items[f.ItemName].Quantity += f.Deposit
+	// reset factory deposit
+	f.Deposit = 0
 }

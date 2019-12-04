@@ -8,7 +8,7 @@ import (
 	"github.com/mgurdal/blackmarkt/user"
 )
 
-func TestFactory(t *testing.T) {
+func TestFactoryUpdate(t *testing.T) {
 
 	t.Run("Update resets the updated at if deposit is full", func(t *testing.T) {
 		now := time.Now()
@@ -178,6 +178,77 @@ func TestFactory(t *testing.T) {
 				"Expected the updated at to be %s got %s",
 				want,
 				factory.UpdatedAt,
+			)
+		}
+	})
+}
+
+func TestFactoryCollect(t *testing.T) {
+
+	t.Run("Collect transports the expected amount of item to user inventory", func(t *testing.T) {
+
+		item := &inventory.Item{
+			Name:     "TestItem",
+			Quantity: 0,
+		}
+		inventoryItems := map[string]*inventory.Item{
+			"TestItem": item,
+		}
+
+		user := &user.User{
+			Inventory: inventory.Inventory{
+				Items: inventoryItems,
+			},
+		}
+		factory := &Factory{
+			ItemName: "TestItem",
+			Speed:    1,
+			Deposit:  3,
+			Limit:    10,
+			User:     user,
+		}
+
+		factory.Collect()
+
+		expectedQuantity := 3
+		userQuantity := user.Inventory.Items["TestItem"].Quantity
+		if userQuantity != expectedQuantity {
+			t.Errorf(
+				"Expected the item quantity to be %d got %d",
+				expectedQuantity,
+				userQuantity,
+			)
+		}
+	})
+
+	t.Run("Collect resets the factory deposit", func(t *testing.T) {
+
+		item := &inventory.Item{
+			Name:     "TestItem",
+			Quantity: 0,
+		}
+		inventoryItems := map[string]*inventory.Item{
+			"TestItem": item,
+		}
+
+		user := &user.User{
+			Inventory: inventory.Inventory{
+				Items: inventoryItems,
+			},
+		}
+		factory := &Factory{
+			ItemName: "TestItem",
+			Speed:    1,
+			Deposit:  3,
+			Limit:    10,
+			User:     user,
+		}
+
+		factory.Collect()
+
+		if factory.Deposit != 0 {
+			t.Error(
+				"Expected the factory deposit to be 0.",
 			)
 		}
 	})
