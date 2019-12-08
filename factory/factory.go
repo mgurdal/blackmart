@@ -5,11 +5,13 @@ import (
 
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/mgurdal/blackmarkt/inventory"
 	"github.com/mgurdal/blackmarkt/user"
 )
 
 type Factory struct {
+	ID           uuid.UUID
 	ItemName     string
 	Speed        int
 	Deposit      int
@@ -57,7 +59,7 @@ func (f *Factory) Update(now time.Time) {
 		}
 
 		for _, item := range f.RawMaterials {
-			f.User.Inventory.Consume(*item)
+			f.User.Inventory.Consume(item.Name, item.Quantity)
 		}
 
 		f.Deposit += 1

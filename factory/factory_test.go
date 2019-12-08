@@ -80,7 +80,7 @@ func TestFactoryUpdate(t *testing.T) {
 			},
 		}
 		user := &user.User{
-			Inventory: inventory.Inventory{
+			Inventory: &inventory.Inventory{
 				Items: inventoryItems,
 			},
 		}
@@ -157,7 +157,7 @@ func TestFactoryUpdate(t *testing.T) {
 			},
 		}
 		user := &user.User{
-			Inventory: inventory.Inventory{
+			Inventory: &inventory.Inventory{
 				Items: inventoryItems,
 			},
 		}
@@ -196,7 +196,7 @@ func TestFactoryCollect(t *testing.T) {
 		}
 
 		user := &user.User{
-			Inventory: inventory.Inventory{
+			Inventory: &inventory.Inventory{
 				Items: inventoryItems,
 			},
 		}
@@ -232,7 +232,7 @@ func TestFactoryCollect(t *testing.T) {
 		}
 
 		user := &user.User{
-			Inventory: inventory.Inventory{
+			Inventory: &inventory.Inventory{
 				Items: inventoryItems,
 			},
 		}
