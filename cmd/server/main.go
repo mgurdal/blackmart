@@ -10,7 +10,6 @@ import (
 func main() {
 	store.GetStore()
 	srv, err := network.NewServer(
-		"tcp",
 		"0.0.0.0:9001",
 	)
 	if err != nil {

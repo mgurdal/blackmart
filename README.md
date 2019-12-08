@@ -17,3 +17,7 @@ You can boot the project using docker-compose.
 ```bash
 docker-compose up
 ```
+
+```bash
+protoc -I proto -I${GOPATH}/src --go_out=plugins=grpc:proto --proto_path="." service.proto
+```
