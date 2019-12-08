@@ -31,3 +31,17 @@ func (u *User) MoveToMarket(item *inventory.Item, price int, amount int) error {
 	}
 	return nil
 }
+
+func (u *User) PurchaseItem(market *market.Market, name string, amount int) error {
+	newItem := &inventory.Item{
+		Name:     name,
+		Quantity: amount,
+	}
+	err := market.Consume(name, amount)
+	if err != nil {
+		// rollback
+		return err
+	}
+	u.Inventory.Add(newItem)
+	return nil
+}
