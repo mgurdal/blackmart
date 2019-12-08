@@ -133,14 +133,9 @@ func TestInventory(t *testing.T) {
 
 		inv := Inventory{Items: items}
 
-		item := Item{
-			"Item2",
-			7,
-			"test",
-		}
-		inv.Consume(item)
+		inv.Consume("Item2", 7)
 
-		got := inv.Items[item.Name].Quantity
+		got := inv.Items["Item2"].Quantity
 		want := 3
 		if got != want {
 			t.Errorf("Expected the item quantity to be %d found %d", want, got)
@@ -161,8 +156,7 @@ func TestInventory(t *testing.T) {
 
 		inv := Inventory{Items: items}
 
-		item := Item{Name: "NotExistingItem"}
-		err := inv.Consume(item)
+		err := inv.Consume("NotExistingItem", 0)
 
 		if err == nil {
 			t.Errorf("Expected to get an error")
@@ -182,12 +176,7 @@ func TestInventory(t *testing.T) {
 
 		inv := Inventory{Items: items}
 
-		item := Item{
-			"Item2",
-			7,
-			"test",
-		}
-		err := inv.Consume(item)
+		err := inv.Consume("Item2", 7)
 
 		if err != nil {
 			t.Errorf("Expected to not get an error")
@@ -207,12 +196,7 @@ func TestInventory(t *testing.T) {
 
 		inv := Inventory{Items: items}
 
-		item := Item{
-			"TestItem",
-			100,
-			"test",
-		}
-		err := inv.Consume(item)
+		err := inv.Consume("TestItem", 100)
 
 		if err == nil {
 			t.Errorf("Expected to get an error")

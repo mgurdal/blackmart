@@ -41,15 +41,15 @@ func (inv *Inventory) Check(consumptions map[string]*Item) (ok bool) {
 }
 
 // Consume reduces the target item's quantity if its in the inventory.
-func (inv *Inventory) Consume(item Item) (err error) {
+func (inv *Inventory) Consume(name string, amount int) (err error) {
 	items := inv.Items
-	inventoryItem, exists := items[item.Name]
+	inventoryItem, exists := items[name]
 	if !exists {
 		return errors.New("Item not found")
 	}
-	if inventoryItem.Quantity < item.Quantity {
+	if inventoryItem.Quantity < amount {
 		return errors.New("Insufficient quantity")
 	}
-	inventoryItem.Quantity -= item.Quantity
+	inventoryItem.Quantity -= amount
 	return
 }
