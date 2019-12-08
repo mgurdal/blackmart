@@ -3,6 +3,7 @@ package main
 import (
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/mgurdal/blackmarkt/factory"
 	"github.com/mgurdal/blackmarkt/user"
 
@@ -12,7 +13,7 @@ import (
 
 func main() {
 	usr := &user.User{
-		ID: 123,
+		ID: uuid.New(),
 		Market: &market.Market{
 			Products: []*market.Product{},
 		},
